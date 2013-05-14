@@ -1,3 +1,3 @@
-- User adds a item to be done
-- User marks a item as done
+- User adds an item to be done
+- User marks an item as done
 - User clears done items

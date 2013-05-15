@@ -1,0 +1,15 @@
+<div ng-app>
+  <h2>My Todo List</h2>
+  <div ng-controller="TodoCtrl">
+    <ul id="todo-list" class="unstyled">
+      <li ng-repeat="item in items">
+        <input type="checkbox" ng-model="item.done">
+        <span class="done-{{item.done}}">{{item.description}}</span>
+      </li>
+    </ul>
+    <form id="new-item" class="horizontal">
+      <input name="description" ng-model="description" ng-model-instant placeholder="new todo item description" type="text">
+      <button class="btn" ng-click="addItem()"><i class="icon-plus"></i>&nbsp;Add</button>
+    </form>
+  </div>
+</div>

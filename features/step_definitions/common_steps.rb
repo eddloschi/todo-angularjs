@@ -1,5 +1,5 @@
 Given(/^I am on the home page$/) do
-  pending # express the regexp above with the code you wish you had
+  visit '/'
 end
 
 Given(/^The following items exist:$/) do |table|
@@ -8,10 +8,15 @@ Given(/^The following items exist:$/) do |table|
 end
 
 Then(/^it should not be done$/) do
-  pending # express the regexp above with the code you wish you had
+  item = page.find('span', text: @description)
+  item['class'].should include 'done-false'
+  item['class'].should_not include 'done-true'
 end
 
 Then(/^I shoud see the following items:$/) do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+  within '#todo-list' do
+    table.hashes.each do |item|
+      page.should have_content item['description']
+    end
+  end
 end

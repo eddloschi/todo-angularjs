@@ -1,3 +1,7 @@
-When(/^I add the item "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I add the item "(.*?)"$/) do |description|
+  within '#new-item' do
+    fill_in 'description', with: description
+    click_on 'Add'
+  end
+  @description = description
 end

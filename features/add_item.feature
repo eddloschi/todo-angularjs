@@ -12,3 +12,9 @@ Feature: User adds an item to be done
       | description |
       | Learn BDD   |
     And it should not be done
+
+  @javascript
+  Scenario: Blank input
+    Given I am on the home page
+    When I add the item " "
+    Then I should see an empty todo list

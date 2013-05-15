@@ -2,10 +2,12 @@
   $scope.items = []
 
   $scope.addItem = ->
-    $scope.items.push
-      description: $scope.description
-      done: false
-    $scope.description = ''
+    description = $scope.description.trim()
+    if description isnt ''
+      $scope.items.push
+        description: description
+        done: false
+      $scope.description = ''
     return
 
   return

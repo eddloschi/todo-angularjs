@@ -22,3 +22,8 @@ describe 'TodoCtrl', ->
       @$scope.description = @description
       @$scope.addItem()
       expect(@$scope.description).toBe ''
+
+    it 'should not add an empty item', ->
+      @$scope.description = ' '
+      @$scope.addItem()
+      expect(@$scope.items.length).toBe(0)

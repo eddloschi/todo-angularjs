@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :item do
-    description "MyText"
+    description "Learn BDD"
     done false
   end
 end

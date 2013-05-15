@@ -12,7 +12,7 @@ Feature: User clears done items
       | Learn Ruby  | true  |
     And I am on the home page
     When I click on the "Clear Done" button
-    Then I shoud see the following items:
+    Then I should see the following items:
       | description |
       | Learn BDD   |
 
@@ -24,7 +24,7 @@ Feature: User clears done items
       | Learn Ruby  | true  |
     And I am on the home page
     When I click on the "Clear Done" button
-    Then I shoud see an empty todo list
+    Then I should see an empty todo list
 
   Scenario: No done items
     Given The following items exist:
@@ -34,7 +34,7 @@ Feature: User clears done items
       | Learn Ruby  | false |
     And I am on the home page
     When I click on the "Clear Done" button
-    Then I shoud see the following items:
+    Then I should see the following items:
       | description |
       | Learn BDD   |
       | Learn Scrum |

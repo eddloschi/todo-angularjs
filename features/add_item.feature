@@ -8,7 +8,7 @@ Feature: User adds an item to be done
   Scenario: New item is added
     Given I am on the home page
     When I add the item "Learn BDD"
-    Then I shoud see the following items:
+    Then I should see the following items:
       | description |
       | Learn BDD   |
     And it should not be done

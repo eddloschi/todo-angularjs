@@ -13,7 +13,7 @@ Then(/^it should not be done$/) do
   item['class'].should_not include 'done-true'
 end
 
-Then(/^I shoud see the following items:$/) do |table|
+Then(/^I should see the following items:$/) do |table|
   within '#todo-list' do
     table.hashes.each do |item|
       page.should have_content item['description']

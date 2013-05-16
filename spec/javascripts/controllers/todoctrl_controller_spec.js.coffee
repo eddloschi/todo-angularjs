@@ -44,3 +44,34 @@ describe 'TodoCtrl', ->
       @$scope.description = ' '
       @$scope.addItem()
       expect(@$scope.items.length).toBe(0)
+
+  describe "updateItem", ->
+
+    beforeEach inject (_$httpBackend_, $rootScope, $controller) ->
+      @$httpBackend = _$httpBackend_
+      @$httpBackend.expectGET('/items').
+        respond [
+          _id: '1'
+          description: 'Learn Scrum'
+          done: false
+        ,
+          _id: '2'
+          description: 'Learn Ruby'
+          done: false
+        ]
+      @$scope = $rootScope.$new()
+      @ctrl = $controller(TodoCtrl, {$scope: @$scope})
+
+    it 'should update the item', ->
+      @$httpBackend.flush()
+      item = @$scope.items.pop()
+      item.done = true
+      @$httpBackend.expectPUT('/items').
+        respond
+          _id: '2'
+          description: 'Learn Ruby'
+          done: true
+      @$scope.updateItem(item)
+      @$httpBackend.flush()
+      expect(item.done).toBe true
+

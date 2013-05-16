@@ -20,4 +20,12 @@ angular.module 'todo', ['todoService']
       $scope.description = ''
     return
 
+  $scope.updateItem = (item) ->
+    item.$update (response) ->
+      item.description = response.description
+      item.done = response.done
+    ,
+    (error) ->
+      console.log error
+
   return

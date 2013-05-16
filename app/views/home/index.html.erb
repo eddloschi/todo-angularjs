@@ -3,7 +3,7 @@
   <div ng-controller="TodoCtrl">
     <ul id="todo-list" class="unstyled">
       <li ng-repeat="item in items">
-        <input type="checkbox" ng-model="item.done">
+        <input type="checkbox" ng-model="item.done" ng-click="updateItem(item)">
         <span class="done-{{item.done}}">{{item.description}}</span>
       </li>
     </ul>

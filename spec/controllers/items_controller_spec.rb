@@ -18,9 +18,23 @@ describe ItemsController do
       @description = 'Learn BDD'
       page.driver.post '/items', {item: {description: @description, done: false}}
     end
+
     it "should create a todo item" do
       item = JSON.parse page.source
       item['description'].should == @description
+    end
+  end
+
+  describe "update" do
+    before do
+      @item = FactoryGirl.create :item
+      page.driver.put '/items', {"_id"=>"#{@item._id}","c_at"=>"#{@item.c_at}","description"=>"#{@item.description}","done"=>"#{!@item.done}","u_at"=>"#{@item.u_at}"}
+    end
+
+    it "should update the item" do
+      item = JSON.parse page.source
+      item['description'].should == @item.description
+      item['done'].should == !@item.done
     end
   end
 end

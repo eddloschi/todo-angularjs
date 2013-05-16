@@ -3,8 +3,7 @@ Given(/^I am on the home page$/) do
 end
 
 Given(/^The following items exist:$/) do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+  Item.create(table.hashes)
 end
 
 Then(/^it should not be done$/) do
@@ -23,4 +22,8 @@ end
 
 Then(/^I should see an empty todo list$/) do
   page.should_not have_selector '#todo-list li'
+end
+
+When(/^I reload the page$/) do
+  visit current_path
 end

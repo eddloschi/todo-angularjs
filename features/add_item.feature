@@ -8,6 +8,7 @@ Feature: User adds an item to be done
   Scenario: New item is added
     Given I am on the home page
     When I add the item "Learn BDD"
+    And I reload the page
     Then I should see the following items:
       | description |
       | Learn BDD   |

@@ -15,4 +15,5 @@
 //= require bootstrap
 //= require angular
 //= require angular-resource
+//= require underscore
 //= require_tree .

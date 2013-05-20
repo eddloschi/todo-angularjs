@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ItemsController do
-  describe "show" do
+  describe "index" do
     before do
       @item = FactoryGirl.create :item
       visit '/items'
@@ -28,13 +28,23 @@ describe ItemsController do
   describe "update" do
     before do
       @item = FactoryGirl.create :item
-      page.driver.put '/items', {"_id"=>"#{@item._id}","c_at"=>"#{@item.c_at}","description"=>"#{@item.description}","done"=>"#{!@item.done}","u_at"=>"#{@item.u_at}"}
+      page.driver.put "/items/#{@item._id}", {"_id"=>"#{@item._id}","c_at"=>"#{@item.c_at}","description"=>"#{@item.description}","done"=>"#{!@item.done}","u_at"=>"#{@item.u_at}"}
     end
 
     it "should update the item" do
       item = JSON.parse page.source
       item['description'].should == @item.description
       item['done'].should == !@item.done
+    end
+  end
+
+  describe "destroy" do
+    before do
+      @item = FactoryGirl.create :item
+      page.driver.delete "/items/#{@item._id}", {"_id"=>"#{@item._id}","c_at"=>"#{@item.c_at}","description"=>"#{@item.description}","done"=>"#{!@item.done}","u_at"=>"#{@item.u_at}"}
+    end
+    it "should destroy the item" do
+      Item.count.should == 0
     end
   end
 end

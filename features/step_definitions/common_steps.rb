@@ -21,7 +21,9 @@ Then(/^I should see the following items:$/) do |table|
 end
 
 Then(/^I should see an empty todo list$/) do
-  page.should_not have_selector '#todo-list li'
+  within '#todo-list' do
+    page.should_not have_selector 'li'
+  end
 end
 
 When(/^I reload the page$/) do

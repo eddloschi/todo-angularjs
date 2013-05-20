@@ -4,28 +4,37 @@ Feature: User clears done items
   As a user
   I want to remove all items marked as done
 
-  Scenario: Two done items
+  @javascript
+  Scenario: One done item
     Given The following items exist:
       | description | done  |
       | Learn BDD   | false |
-      | Learn Scrum | true  |
+      | Learn Scrum | false |
       | Learn Ruby  | true  |
     And I am on the home page
     When I click on the "Clear Done" button
+    And I reload the page
     Then I should see the following items:
       | description |
       | Learn BDD   |
+      | Learn Scrum |
+    And I should not see the following items:
+      | description |
+      | Learn Ruby  |
 
+  @javascript
   Scenario: All items done
     Given The following items exist:
-      | description | done  |
+      | description | done |
       | Learn BDD   | true |
-      | Learn Scrum | true  |
-      | Learn Ruby  | true  |
+      | Learn Scrum | true |
+      | Learn Ruby  | true |
     And I am on the home page
     When I click on the "Clear Done" button
+    And I reload the page
     Then I should see an empty todo list
 
+  @javascript
   Scenario: No done items
     Given The following items exist:
       | description | done  |
@@ -34,6 +43,7 @@ Feature: User clears done items
       | Learn Ruby  | false |
     And I am on the home page
     When I click on the "Clear Done" button
+    And I reload the page
     Then I should see the following items:
       | description |
       | Learn BDD   |

@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  def show
+  def index
     @items = Item.all
     render json: @items
   end
@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item = Item.find params[:_id]
+    @item = Item.find params[:id]
 
     @item.description = params[:description]
     @item.done = params[:done]
@@ -25,5 +25,13 @@ class ItemsController < ApplicationController
     else
       render json: @item.errors.to_json, status: 400
     end
+  end
+
+  def destroy
+    @item = Item.find params[:id]
+
+    @item.destroy
+
+    render nothing: true
   end
 end

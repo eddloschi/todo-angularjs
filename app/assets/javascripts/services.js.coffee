@@ -1,5 +1,7 @@
 angular.module('todoService', ['ngResource']).
   factory 'Item', ($resource) ->
-    $resource '/items', {},
+    $resource '/items/:id',
+      id: '@_id'
+    ,
       update:
         method: 'PUT'

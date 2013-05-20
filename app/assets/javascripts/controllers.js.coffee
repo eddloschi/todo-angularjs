@@ -18,7 +18,6 @@ angular.module 'todo', ['todoService']
       (error) ->
         console.log error
       $scope.description = ''
-    return
 
   $scope.updateItem = (item) ->
     item.$update (response) ->
@@ -27,5 +26,11 @@ angular.module 'todo', ['todoService']
     ,
     (error) ->
       console.log error
+
+  $scope.clearDone = ->
+    $scope.items = _.filter $scope.items, (item, index, items) ->
+      item.$delete() if item.done
+      !item.done
+    return
 
   return

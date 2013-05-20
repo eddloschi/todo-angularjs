@@ -3,5 +3,5 @@ TodoAngularjs::Application.routes.draw do
 
   mount JasmineRails::Engine => "/jasmine" if defined?(JasmineRails)
 
-  resource :items
+  resources :items, only: [:index, :create, :update, :destroy]
 end

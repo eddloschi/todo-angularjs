@@ -1,6 +1,7 @@
 #= require angular
 #= require angular-resource
 #= require angular-mocks
+#= require underscore
 #= require controllers
 #= require services
 
@@ -66,7 +67,7 @@ describe 'TodoCtrl', ->
       @$httpBackend.flush()
       item = @$scope.items.pop()
       item.done = true
-      @$httpBackend.expectPUT('/items').
+      @$httpBackend.expectPUT("/items/#{item._id}").
         respond
           _id: '2'
           description: 'Learn Ruby'
@@ -74,4 +75,28 @@ describe 'TodoCtrl', ->
       @$scope.updateItem(item)
       @$httpBackend.flush()
       expect(item.done).toBe true
+
+  describe "clearDone", ->
+
+    beforeEach inject (_$httpBackend_, $rootScope, $controller) ->
+      @$httpBackend = _$httpBackend_
+      @$httpBackend.expectGET('/items').
+        respond [
+          _id: '1'
+          description: 'Learn Scrum'
+          done: false
+        ,
+          _id: '2'
+          description: 'Learn Ruby'
+          done: true
+        ]
+      @$scope = $rootScope.$new()
+      @ctrl = $controller(TodoCtrl, {$scope: @$scope})
+
+    it 'should clear done items', ->
+      @$httpBackend.flush()
+      @$httpBackend.expectDELETE('/items/2').respond ''
+      @$scope.clearDone()
+      expect(@$scope.items.length).toBe 1
+
 
